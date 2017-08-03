@@ -7,6 +7,22 @@ class User extends React.Component {
         this.state = {};
     }
 
+    fetchData () {
+       fetch(`https://api.github.com/users/${this.props.params.username}`)
+        .then(response => response.json())
+        .then(
+            user => {
+                // How can we use `this` inside a callback without binding it??
+                // Make sure you understand this fundamental difference with arrow functions!!!
+                this.setState({
+                    user: user
+                });
+            }
+        );
+    }
+    
+    
+    
     /*
     This method will be called by React after the first render. It's a perfect place to load
     data with AJAX. This User component gets mounted in the DOM as soon as the URL is /user/:username
@@ -20,17 +36,14 @@ class User extends React.Component {
     When `render` gets called again, `this.state.user` exists and we get the user info display instead of "LOADING..."
     */
     componentDidMount() {
-        fetch(`https://api.github.com/users/${this.props.params.username}`)
-        .then(response => response.json())
-        .then(
-            user => {
-                // How can we use `this` inside a callback without binding it??
-                // Make sure you understand this fundamental difference with arrow functions!!!
-                this.setState({
-                    user: user
-                });
-            }
-        );
+        this.fetchData();
+    }
+    
+    componentDidUpdate(prevProps) {
+      if (prevProps.params.username !== this.props.params.username) { 
+          this.fetchData();
+      }
+    
     }
 
     /*
@@ -89,6 +102,9 @@ class User extends React.Component {
                         {stats.map(this.renderStat)}
                     </ul>
                 </div>
+                <main className="followers-content">
+                    {this.props.children}
+                </main>
             </div>
         );
     }

@@ -105,3 +105,33 @@ h1,h2,h3,h4,h5,h6 {
     margin: 0;
     white-space: nowrap;
 }
+
+.followers-display {
+    display: flex;
+    justify-content: center;
+}
+
+.followers-display img {
+    border-radius: 15%;
+    padding: 20px;
+    max-width: 100%;
+}
+
+.followers-page li {
+    list-style-type: none;
+    text-align: center;
+}
+
+.followers-page li a {
+    text-decoration: none;
+    color: green;
+    text-transform: capitalize;
+}
+
+.followers-page h3 {
+    text-align: center;
+    color: green;
+    text-transform: capitalize;
+    padding: 40px;
+    font-size: 50px;
+}
