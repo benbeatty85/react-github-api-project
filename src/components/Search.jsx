@@ -23,7 +23,7 @@ class Search extends React.Component {
 
     render() {
         return (
-            <div className="search-page">
+            <div className="search-page front-page">
                 <h2>Enter a GitHub username</h2>
                 <form onSubmit={this._handleSubmit}>
                     <input ref="userInput" className="search-page__input" type="text" />

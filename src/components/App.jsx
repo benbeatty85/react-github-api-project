@@ -11,7 +11,7 @@ If the URL is /user/:username then the User component will be displayed.
 class App extends React.Component {
     render() {
         return (
-            <div className="main-app">
+            <div className="main-app front-page">
                 <header className="main-header">
                     <h1><Link to="/">React GitHub Project</Link></h1>
                 </header>

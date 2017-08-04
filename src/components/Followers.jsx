@@ -48,7 +48,6 @@ class Followers extends React.Component {
                         <li key={follower.id}>
                             <GithubUser user={follower.login} avatar_url={follower.avatar_url} img src={follower.avatar_url} />  
                             
-                          
                         </li>
                         )
                     })}
