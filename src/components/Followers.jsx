@@ -1,16 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router';
 import GithubUser from './GithubUser';
+var Infinite = require('react-infinite');
+
 class Followers extends React.Component {
     
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            page: 1,
+            loading: false,
+            followers: []
+        };
     }
     
     fetchData() {
         //console.log(this)
-        fetch(`https://api.github.com/users/${this.props.params.username}/followers`)
+        
+        this.setState = {
+            loading: true
+        };
+        
+        fetch(`https://api.github.com/users/${this.props.params.username}/followers?&{this.state.page}&per_page=50`)
         .then(response => response.json())
         .then(
             followers => {
