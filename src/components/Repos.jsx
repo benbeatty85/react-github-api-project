@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router';
-import GithubUser from './GithubUser';
-class Followers extends React.Component {
+//import { Link } from 'react-router';
+import GithubRepo from './GithubRepo';
+class Repos extends React.Component {
     
     constructor() {
         super();
@@ -10,12 +10,12 @@ class Followers extends React.Component {
     
     fetchData() {
         //console.log(this)
-        fetch(`https://api.github.com/users/${this.props.params.username}/followers`)
+        fetch(`https://api.github.com/users/${this.props.params.username}/repos`)
         .then(response => response.json())
         .then(
-            followers => {
+            repos => {
                 this.setState({
-                    followers: followers
+                    repos: repos 
                 });
             }
         )
@@ -35,22 +35,22 @@ class Followers extends React.Component {
     }
     
     render() {
-        if (!this.state.followers) {
-            return <div>LOADING FOLLOWERS...</div>;
+        if (!this.state.repos) {
+            return <div>LOADING REPOS...</div>;
         }
-        //console.log(this.state.followers.object.username);
+        //console.log(this.state);
         return (
-            <div className="followers-page">
-                <h3>Followers of {this.props.params.username}</h3>
+            <div className="repos-page">
+                <h3>Public Repositories by {this.props.params.username}</h3>
                 <ul>
-                    {this.state.followers.map(follower => { 
+                    {this.state.repos.map(repo => { 
                     return(
-                        <li key={follower.id}>
-                            <GithubUser user={follower.login} avatar_url={follower.avatar_url} img src={follower.avatar_url} />  
+                        <li key={repo.id}>
+                            <GithubRepo name={repo.full_name} stargazers={repo.stargazers_count}/>  
                             
                           
                         </li>
-                        )
+                        ) 
                     })}
                       
                   
@@ -59,4 +59,4 @@ class Followers extends React.Component {
         );
     }
 }
-export default Followers;
+export default Repos;
