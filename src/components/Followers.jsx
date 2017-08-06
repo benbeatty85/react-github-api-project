@@ -5,7 +5,7 @@ import Infinite from 'react-infinite';
 
 class Followers extends React.Component {
 
-constructor() {
+ constructor() {
     super();
     this.state = {
       page: 1,
@@ -14,19 +14,16 @@ constructor() {
     };
 }
 
-fetchData = () => {
+ fetchData = () => {
 
-  this.setState({
+   this.setState({
       loading: true
     });
-    //console.log(this)
     fetch(`https://api.github.com/users/${this.props.params.username}/followers?&page=${this.state.page}&per_page=50`)
       .then(response => response.json())
       .then(
         followersResponse => {
-          //console.log('got response');
-
-        let mergedArray = this.state.followers.concat(followersResponse);
+         let mergedArray = this.state.followers.concat(followersResponse);
           this.setState({
             followers: mergedArray,
             page: this.state.page + 1,
@@ -34,27 +31,17 @@ fetchData = () => {
           });
         }
       );
-    // .then(
-    //     console.log(this)
-    // )
-  }
-  //
-  // componentDidMount() {
-  //   this.fetchData();
-  // }
 
-componentDidUpdate(prevProps, prevState) {
+  }
+
+
+ componentDidUpdate(prevProps, prevState) {
     if (prevProps.params.username !== this.props.params.username) {
       this.fetchData();
     }
   }
 
-render() {
-    //console.log('in render', this.state.followers);
-    //
-    // if (!this.state.followers) {
-    //   return <div>LOADING followers...</div>;
-    // }
+ render() {
     return (
       <div className="followers-page">
         <h3>Followers of {this.props.params.username}</h3>
@@ -66,10 +53,10 @@ render() {
                       elementHeight={100}
                       infiniteLoadBeginEdgeOffset={100} >
                 {this.state.followers.map(follower => {
-                      return <GithubUser user={follower.login} key={follower.id} avatar_url={follower.avatar_url} />
+                      return <GithubUser user={follower.login} key={follower.id} avatar_url={follower.avatar_url} /> 
                     
-               }
-                )}
+                }
+                )} 
             </Infinite>
         </div>
       </div>

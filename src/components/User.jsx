@@ -7,8 +7,18 @@ class User extends React.Component {
         this.state = {};
     }
 
-    fetchData () {
-       fetch(`https://api.github.com/users/${this.props.params.username}`)
+    /*
+    This method will be called by React after the first render. It's a perfect place to load
+    data with AJAX. This User component gets mounted in the DOM as soon as the URL is /user/:username
+    When that happens, react-router will pass a `params` prop containing every parameter in the URL, just like
+    when we get URL parameters in Express with req.params. Here, it's this.props.params. Since we called our route
+    parameter `username`, it's available under this.props.params.username
+    We're using it to make an API call to GitHub to fetch the user data for the username in the URL. Once we receive
+    the data -- in the callback -- we call `setState` to put the user data in our state. This will trigger a re-render.
+    When `render` gets called again, `this.state.user` exists and we get the user info display instead of "LOADING..."
+    */
+    fetchData() {
+        fetch(`https://api.github.com/users/${this.props.params.username}`)
         .then(response => response.json())
         .then(
             user => {
@@ -21,29 +31,14 @@ class User extends React.Component {
         );
     }
     
-    
-    
-    /*
-    This method will be called by React after the first render. It's a perfect place to load
-    data with AJAX. This User component gets mounted in the DOM as soon as the URL is /user/:username
-
-    When that happens, react-router will pass a `params` prop containing every parameter in the URL, just like
-    when we get URL parameters in Express with req.params. Here, it's this.props.params. Since we called our route
-    parameter `username`, it's available under this.props.params.username
-
-    We're using it to make an API call to GitHub to fetch the user data for the username in the URL. Once we receive
-    the data -- in the callback -- we call `setState` to put the user data in our state. This will trigger a re-render.
-    When `render` gets called again, `this.state.user` exists and we get the user info display instead of "LOADING..."
-    */
     componentDidMount() {
         this.fetchData();
     }
     
-    componentDidUpdate(prevProps) {
-      if (prevProps.params.username !== this.props.params.username) { 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.params.username !== this.props.params.username) { 
           this.fetchData();
       }
-    
     }
 
     /*
@@ -52,7 +47,7 @@ class User extends React.Component {
     renderStat(stat) {
         return (
             <li key={stat.name} className="user-info__stat">
-                <Link to={stat.url}>
+                <Link to={stat.url} className="stat">
                     <p className="user-info__stat-value">{stat.value}</p>
                     <p className="user-info__stat-name">{stat.name}</p>
                 </Link>
@@ -102,9 +97,7 @@ class User extends React.Component {
                         {stats.map(this.renderStat)}
                     </ul>
                 </div>
-                <main className="followers-content">
-                    {this.props.children}
-                </main>
+                {this.props.children}
             </div>
         );
     }

@@ -1,10 +1,11 @@
+
 import React from 'react';
 import { Link } from 'react-router';
 
 class GithubUser extends React.Component {
     
+
     render() {
-        // console.log(this.props)
         return (
         <div>
             <Link className="githubUserLink" to={`/user/${this.props.user}`}>
@@ -18,5 +19,4 @@ class GithubUser extends React.Component {
     }
 }
 export default GithubUser;
-
 
