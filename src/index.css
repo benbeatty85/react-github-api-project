@@ -35,11 +35,6 @@ h1,h2,h3,h4,h5,h6 {
     color: #e5e5ff;
 }
 
-.main-content {
-    background-color: pink;
-    height: 100%;
-}
-
 
 /*search section*/
 
@@ -91,9 +86,7 @@ h1,h2,h3,h4,h5,h6 {
 
 
 
-
-
-
+/*User Info*/
 
 .user-info {
     display: flex;
@@ -102,38 +95,37 @@ h1,h2,h3,h4,h5,h6 {
     justify-content: center;
     align-items: center;
     max-width: 100%;
+    background-color: #c6ecc6;
 }
 
 .user-info__avatar {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    margin-right: 1em;
-    display: flex;
-    flex-direction: row;
+    width: 200px;
+    height: 200px;
+    padding: 50px 20px;
 }
 
 .user-info__text {
     text-decoration: none;
-    flex: 1;
-    font-size: 1.5rem;
+    flex-grow: 1;
+    font-size: 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    
 }
 
 .user-info__title {
-    font-size: 20px;
+    font-size: 40px;
 }
 
 .user-info__title, .user-info__bio {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #696969;
-    margin-left: 0;
+    color: #000;
 }
 
 .user-info__stats {
@@ -162,10 +154,18 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .user-info__stat-value, .user-info__stat-name {
-    color: #696969;
-    font-size: 1.3rem;
+    color: #000;
+    font-size: 30px;
 }
 
+.user-info__stat-name:hover {
+    color: #fff;
+    text-shadow: 2px 2px grey;
+}
+
+.githubUserLink {
+    
+}
 
  .githubUserDisplay {
      display: flex;
